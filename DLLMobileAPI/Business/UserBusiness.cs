@@ -25,7 +25,7 @@ namespace DLLMobileAPI.Business
             int tokenTimeoutMins = Int32.Parse(ConfigurationManager.AppSettings["tokenTimeoutMins"]);
             using (ApiContext context = new ApiContext())
             {
-                DateTime lastTenMinutes = DateTime.Now.AddMinutes(tokenTimeoutMins);
+                DateTime lastTenMinutes = DateTime.Now.AddMinutes(20);
                 isAuthenticatedInAnotherDevice = context.LoginActivities.Any(l => l.IdUser == idUser && l.DeviceId != deviceId && l.LoginDate > lastTenMinutes);
             }
 
