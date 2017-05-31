@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
+using crypt = BCrypt.Net;
 
 namespace DLLMobileAPI.Controllers
 {
@@ -30,12 +31,21 @@ namespace DLLMobileAPI.Controllers
             {
                 using (var context = new ApiContext())
                 {
-                    context.Users.Add(user);
+                    var salt = crypt.BCrypt.GenerateSalt();
+                    string encryptedPassword = crypt.BCrypt.HashPassword(user.Password, salt);
+                    var newUser = new ApplicationUser();
+                    newUser.Name = user.Name;
+                    newUser.UserName = user.UserName;
+                    newUser.Cpf = user.Cpf;
+                    newUser.CellPhoneNumber = user.CellPhoneNumber;
+                    newUser.Password = encryptedPassword;
+
+                    context.Users.Add(newUser);
                     await context.SaveChangesAsync();
                     message = "User Created Successfully!";
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 message = "Error on saving User.";
             }
