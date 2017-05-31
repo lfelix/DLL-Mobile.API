@@ -19,10 +19,29 @@ namespace DLLMobileAPI.Controllers
             {
                 return Ok(await context.Users.ToListAsync());
             }
-
-
-            var oi = User.Identity.IsAuthenticated;
         }
-        
+
+        [HttpPost]
+        public async Task<IHttpActionResult> Post(ApplicationUser user)
+        {
+            string message;
+
+            try
+            {
+                using (var context = new ApiContext())
+                {
+                    context.Users.Add(user);
+                    await context.SaveChangesAsync();
+                    message = "User Created Successfully!";
+                }
+            }
+            catch (Exception)
+            {
+                message = "Error on saving User.";
+            }
+
+            return Ok(message);
+        }
+
     }
 }
