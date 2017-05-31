@@ -23,6 +23,7 @@ namespace DLLMobileAPI.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IHttpActionResult> Post(ApplicationUser user)
         {
             string message;
