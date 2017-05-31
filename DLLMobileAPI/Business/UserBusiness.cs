@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Microsoft.Owin.Security.OAuth;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Web;
 
@@ -22,11 +24,11 @@ namespace DLLMobileAPI.Business
         internal bool AuthenticatedInAnotherDevice(string deviceId, int idUser)
         {
             bool isAuthenticatedInAnotherDevice = false;
-            int tokenTimeoutMins = Int32.Parse(ConfigurationManager.AppSettings["tokenTimeoutMins"]);
+            int tokenTimeoutMins = int.Parse(ConfigurationManager.AppSettings["tokenTimeoutMins"]);
             using (ApiContext context = new ApiContext())
-            {
-                DateTime lastTenMinutes = DateTime.Now.AddMinutes(20);
-                isAuthenticatedInAnotherDevice = context.LoginActivities.Any(l => l.IdUser == idUser && l.DeviceId != deviceId && l.LoginDate > lastTenMinutes);
+            {                
+                DateTime tokenTimeout = DateTime.Now.AddMinutes(-tokenTimeoutMins);
+                isAuthenticatedInAnotherDevice = context.LoginActivities.Any(l => l.IdUser == idUser && l.DeviceId != deviceId && l.LoginDate > tokenTimeout);
             }
 
             return isAuthenticatedInAnotherDevice;
@@ -37,12 +39,20 @@ namespace DLLMobileAPI.Business
         {
             using (ApiContext context = new ApiContext())
             {
-                context.LoginActivities.Add(new LoginActivity
+                var loginActivity = context.LoginActivities.FirstOrDefault(a => a.DeviceId == deviceId && a.IdUser == idUser);
+
+                if (loginActivity == null)
                 {
-                    IdUser = idUser,
-                    DeviceId = deviceId,
-                    LoginDate = DateTime.Now
-                });
+                    loginActivity = new LoginActivity
+                    {
+                        IdUser = idUser,
+                        DeviceId = deviceId,
+                    };
+                }
+                
+                loginActivity.LoginDate = DateTime.Now;
+
+                context.LoginActivities.AddOrUpdate(loginActivity);
                 context.SaveChanges();
             }
         }
