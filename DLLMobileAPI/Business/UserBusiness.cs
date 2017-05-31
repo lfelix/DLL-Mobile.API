@@ -27,7 +27,7 @@ namespace DLLMobileAPI.Business
             int tokenTimeoutMins = int.Parse(ConfigurationManager.AppSettings["tokenTimeoutMins"]);
             using (ApiContext context = new ApiContext())
             {                
-                DateTime tokenTimeout = DateTime.Now.AddMinutes(-tokenTimeoutMins);
+                DateTime tokenTimeout = DateTime.UtcNow.AddMinutes(-tokenTimeoutMins);
                 isAuthenticatedInAnotherDevice = context.LoginActivities.Any(l => l.IdUser == idUser && l.DeviceId != deviceId && l.LoginDate > tokenTimeout);
             }
 
@@ -50,7 +50,7 @@ namespace DLLMobileAPI.Business
                     };
                 }
                 
-                loginActivity.LoginDate = DateTime.Now;
+                loginActivity.LoginDate = DateTime.UtcNow;
 
                 context.LoginActivities.AddOrUpdate(loginActivity);
                 context.SaveChanges();
