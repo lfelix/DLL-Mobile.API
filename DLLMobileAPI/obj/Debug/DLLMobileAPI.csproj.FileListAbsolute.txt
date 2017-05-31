@@ -394,3 +394,6 @@ C:\Users\Lucas\Source\Repos\DLL-Mobile.API\DLLMobileAPI\obj\Debug\DLLMobileAPI.M
 C:\Users\Lucas\Source\Repos\DLL-Mobile.API\DLLMobileAPI\obj\Debug\DLLMobileAPI.csproj.GenerateResource.Cache
 C:\Users\Lucas\Source\Repos\DLL-Mobile.API\DLLMobileAPI\obj\Debug\DLLMobileAPI.dll
 C:\Users\Lucas\Source\Repos\DLL-Mobile.API\DLLMobileAPI\obj\Debug\DLLMobileAPI.pdb
+C:\Users\Lucas\Source\Repos\DLL-Mobile.API\DLLMobileAPI\obj\Debug\DLLMobileAPI.Migrations.Removed_IdUser.resources
+C:\Users\Lucas\Source\Repos\DLL-Mobile.API\DLLMobileAPI\obj\Debug\DLLMobileAPI.Migrations.Rename_User_Id.resources
+C:\Users\Lucas\Source\Repos\DLL-Mobile.API\DLLMobileAPI\obj\Debug\DLLMobileAPI.Migrations.Add_Annotation.resources

@@ -46,7 +46,7 @@ namespace DLLMobileAPI.Business
                     loginActivity = new LoginActivity
                     {
                         IdUser = idUser,
-                        DeviceId = deviceId,
+                        DeviceId = deviceId
                     };
                 }
                 

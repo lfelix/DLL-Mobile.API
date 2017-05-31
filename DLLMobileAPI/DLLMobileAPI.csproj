@@ -227,6 +227,18 @@
     <Compile Include="Migrations\201705301842558_Removed_Token.Designer.cs">
       <DependentUpon>201705301842558_Removed_Token.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201705310246251_Removed_IdUser.cs" />
+    <Compile Include="Migrations\201705310246251_Removed_IdUser.Designer.cs">
+      <DependentUpon>201705310246251_Removed_IdUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705310247186_Rename_User_Id.cs" />
+    <Compile Include="Migrations\201705310247186_Rename_User_Id.Designer.cs">
+      <DependentUpon>201705310247186_Rename_User_Id.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705310252598_Add_Annotation.cs" />
+    <Compile Include="Migrations\201705310252598_Add_Annotation.Designer.cs">
+      <DependentUpon>201705310252598_Add_Annotation.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\CustomOAuthProvider.cs" />
@@ -256,6 +268,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705301842558_Removed_Token.resx">
       <DependentUpon>201705301842558_Removed_Token.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705310246251_Removed_IdUser.resx">
+      <DependentUpon>201705310246251_Removed_IdUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705310247186_Rename_User_Id.resx">
+      <DependentUpon>201705310247186_Rename_User_Id.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705310252598_Add_Annotation.resx">
+      <DependentUpon>201705310252598_Add_Annotation.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

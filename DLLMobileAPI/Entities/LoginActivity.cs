@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DLLMobileAPI
 {
@@ -8,6 +9,7 @@ namespace DLLMobileAPI
 
         public int IdUser { get; set; }
 
+        [ForeignKey("IdUser")]
         public virtual ApplicationUser User { get; set; }
         
         public string DeviceId { get; set; }
