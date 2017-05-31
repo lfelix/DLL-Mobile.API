@@ -15,5 +15,9 @@ namespace DLLMobileAPI
         public string DeviceId { get; set; }
 
         public DateTime LoginDate { get; set; }
+
+        public string Location { get; set; }
+
+        public string FriendlyDeviceName { get; set; }
     }
 }

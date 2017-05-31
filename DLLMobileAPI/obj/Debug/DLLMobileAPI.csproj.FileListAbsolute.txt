@@ -397,3 +397,4 @@ C:\Users\Lucas\Source\Repos\DLL-Mobile.API\DLLMobileAPI\obj\Debug\DLLMobileAPI.p
 C:\Users\Lucas\Source\Repos\DLL-Mobile.API\DLLMobileAPI\obj\Debug\DLLMobileAPI.Migrations.Removed_IdUser.resources
 C:\Users\Lucas\Source\Repos\DLL-Mobile.API\DLLMobileAPI\obj\Debug\DLLMobileAPI.Migrations.Rename_User_Id.resources
 C:\Users\Lucas\Source\Repos\DLL-Mobile.API\DLLMobileAPI\obj\Debug\DLLMobileAPI.Migrations.Add_Annotation.resources
+C:\Users\Lucas\Source\Repos\DLL-Mobile.API\DLLMobileAPI\obj\Debug\DLLMobileAPI.Migrations.Create_Location_DeviceName.resources

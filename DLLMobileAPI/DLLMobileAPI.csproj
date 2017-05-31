@@ -239,6 +239,10 @@
     <Compile Include="Migrations\201705310252598_Add_Annotation.Designer.cs">
       <DependentUpon>201705310252598_Add_Annotation.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201705310337076_Create_Location_DeviceName.cs" />
+    <Compile Include="Migrations\201705310337076_Create_Location_DeviceName.Designer.cs">
+      <DependentUpon>201705310337076_Create_Location_DeviceName.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\CustomOAuthProvider.cs" />
@@ -277,6 +281,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705310252598_Add_Annotation.resx">
       <DependentUpon>201705310252598_Add_Annotation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705310337076_Create_Location_DeviceName.resx">
+      <DependentUpon>201705310337076_Create_Location_DeviceName.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
