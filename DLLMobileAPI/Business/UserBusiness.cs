@@ -5,6 +5,7 @@ using System.Configuration;
 using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Web;
+using crypt = BCrypt.Net;
 
 namespace DLLMobileAPI.Business
 {
@@ -15,7 +16,7 @@ namespace DLLMobileAPI.Business
             ApplicationUser user = null;
             using (ApiContext context = new ApiContext())
             {
-                user = context.Users.FirstOrDefault(u => u.UserName == userName && u.Password == password);
+                user = context.Users.AsEnumerable().FirstOrDefault(u => u.UserName == userName && crypt.BCrypt.Verify(password, u.Password));
             }
             
             return user;
