@@ -43,12 +43,12 @@ namespace DLLMobileAPI.Controllers
 
                     context.Users.Add(newUser);
                     await context.SaveChangesAsync();
-                    message = "User Created Successfully!";
+                    message = "Usuário criado com sucesso.";
                 }
             }
             catch (Exception e)
             {
-                message = "Error on saving User.";
+                message = "Ocorreu um erro ao criar usuário.";
             }
 
             return Ok(message);
