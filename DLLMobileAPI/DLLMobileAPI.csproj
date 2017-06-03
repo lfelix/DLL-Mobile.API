@@ -216,6 +216,8 @@
     <Compile Include="App_Start\Startup.OAuth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Business\UserBusiness.cs" />
+    <Compile Include="Commands\CreateUserCommand.cs" />
+    <Compile Include="Commands\UpdateUserCommand.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Entities\ApplicationUser.cs" />
     <Compile Include="Global.asax.cs">

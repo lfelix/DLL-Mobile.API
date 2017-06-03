@@ -1,4 +1,5 @@
 ﻿using DLLMobileAPI;
+using DLLMobileAPI.Commands;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -24,7 +25,7 @@ namespace DLLMobileAPI.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public async Task<IHttpActionResult> Post(ApplicationUser user)
+        public async Task<IHttpActionResult> Post(CreateUserCommand createUserCommand)
         {
             string message;
 
@@ -33,12 +34,13 @@ namespace DLLMobileAPI.Controllers
                 using (var context = new ApiContext())
                 {
                     var salt = crypt.BCrypt.GenerateSalt();
-                    string encryptedPassword = crypt.BCrypt.HashPassword(user.Password, salt);
+                    string encryptedPassword = crypt.BCrypt.HashPassword(createUserCommand.Password, salt);
                     var newUser = new ApplicationUser();
-                    newUser.Name = user.Name;
-                    newUser.UserName = user.UserName;
-                    newUser.Cpf = user.Cpf;
-                    newUser.CellPhoneNumber = user.CellPhoneNumber;
+
+                    newUser.Name = createUserCommand.Name;
+                    newUser.UserName = createUserCommand.UserName;
+                    newUser.Cpf = createUserCommand.Cpf;
+                    newUser.CellPhoneNumber = createUserCommand.CellPhoneNumber;
                     newUser.Password = encryptedPassword;
 
                     context.Users.Add(newUser);
@@ -51,7 +53,45 @@ namespace DLLMobileAPI.Controllers
                 message = "Ocorreu um erro ao criar usuário.";
             }
 
-            return Ok(message);
+            return Ok(Json(new { message = message }));
+        }
+        
+        [HttpPut]
+        [AllowAnonymous]
+        public async Task<IHttpActionResult> Put(UpdateUserCommand updateUserCommand)
+        {
+            string message;
+
+            try
+            {
+                using (var context = new ApiContext())
+                {
+                    var userEdited = context.Users.AsEnumerable().FirstOrDefault(u => u.UserName == updateUserCommand.UserName && crypt.BCrypt.Verify(updateUserCommand.Password, u.Password));
+
+                    if (userEdited != null)
+                    {
+                        var salt = crypt.BCrypt.GenerateSalt();
+                        string encryptedPassword = crypt.BCrypt.HashPassword(updateUserCommand.NewPassword, salt);
+
+                        userEdited.UserName = updateUserCommand.UserName;
+                        userEdited.Password = encryptedPassword;
+
+                        context.Users.Add(userEdited);
+                        await context.SaveChangesAsync();
+                        message = "Usuário alterado com sucesso.";
+                    }
+                    else
+                    {
+                        message = "Usuário não encontrado.";
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                message = "Ocorreu um erro ao alterar usuário.";
+            }
+
+            return Ok(Json(new { message = message }));
         }
 
     }
