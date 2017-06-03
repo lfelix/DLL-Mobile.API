@@ -3,6 +3,7 @@ using DLLMobileAPI.Commands;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -53,7 +54,7 @@ namespace DLLMobileAPI.Controllers
                 message = "Ocorreu um erro ao criar usuário.";
             }
 
-            return Ok(Json(new { message = message }));
+            return Ok(new { message = message });
         }
         
         [HttpPut]
@@ -76,7 +77,7 @@ namespace DLLMobileAPI.Controllers
                         userEdited.UserName = updateUserCommand.UserName;
                         userEdited.Password = encryptedPassword;
 
-                        context.Users.Add(userEdited);
+                        context.Users.AddOrUpdate(userEdited);
                         await context.SaveChangesAsync();
                         message = "Usuário alterado com sucesso.";
                     }
@@ -91,7 +92,7 @@ namespace DLLMobileAPI.Controllers
                 message = "Ocorreu um erro ao alterar usuário.";
             }
 
-            return Ok(Json(new { message = message }));
+            return Ok(new { message = message });
         }
 
     }
