@@ -218,6 +218,7 @@
     <Compile Include="Business\UserBusiness.cs" />
     <Compile Include="Commands\CreateUserCommand.cs" />
     <Compile Include="Commands\UpdateUserCommand.cs" />
+    <Compile Include="Controllers\ResetController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Entities\ApplicationUser.cs" />
     <Compile Include="Global.asax.cs">
@@ -268,6 +269,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Reset\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

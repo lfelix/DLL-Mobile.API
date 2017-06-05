@@ -108,12 +108,12 @@ namespace DLLMobileAPI.Controllers
                     cellPhone = context.Users.FirstOrDefault(u => u.Cpf == lcpf).CellPhoneNumber;
                 }
             }
-            catch (Exception e) 
+            catch (Exception e)
             {
                 return NotFound();
             }
 
-            return Ok(new { cellPhone = "55"+cellPhone });
+            return Ok(new { cellPhone = "55" + cellPhone });
         }
     }
 }
