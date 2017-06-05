@@ -67,7 +67,15 @@ namespace DLLMobileAPI.Controllers
             {
                 using (var context = new ApiContext())
                 {
-                    var userEdited = context.Users.AsEnumerable().FirstOrDefault(u => u.UserName == updateUserCommand.UserName && crypt.BCrypt.Verify(updateUserCommand.Password, u.Password));
+                    ApplicationUser userEdited;
+                    if (updateUserCommand.IsReset)
+                    {
+                        userEdited = context.Users.FirstOrDefault(u => u.UserName == updateUserCommand.UserName);
+                    }
+                    else
+                    {
+                        userEdited = context.Users.AsEnumerable().FirstOrDefault(u => u.UserName == updateUserCommand.UserName && crypt.BCrypt.Verify(updateUserCommand.Password, u.Password));
+                    }
 
                     if (userEdited != null)
                     {

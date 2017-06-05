@@ -12,5 +12,7 @@ namespace DLLMobileAPI.Commands
         public string Password { get; set; }
 
         public string NewPassword { get; set; }
+
+        public bool IsReset { get; set; }
     }
 }
