@@ -95,5 +95,25 @@ namespace DLLMobileAPI.Controllers
             return Ok(new { message = message });
         }
 
+        [AllowAnonymous]
+        [HttpGet]
+        public async Task<IHttpActionResult> Phone([FromUri]string cpf)
+        {
+            long cellPhone;
+            try
+            {
+                using (var context = new ApiContext())
+                {
+                    long lcpf = long.Parse(cpf);
+                    cellPhone = context.Users.FirstOrDefault(u => u.Cpf == lcpf).CellPhoneNumber;
+                }
+            }
+            catch (Exception e) 
+            {
+                return NotFound();
+            }
+
+            return Ok(new { cellPhone = "55"+cellPhone });
+        }
     }
 }
