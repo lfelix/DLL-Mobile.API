@@ -43,7 +43,8 @@ namespace DLLMobileAPI.Controllers
                     var useractivity = context.LoginActivities.FirstOrDefault(l => l.User.UserName == username);
                     if(useractivity != null)
                     {
-                        context.Entry(useractivity).State = System.Data.Entity.EntityState.Deleted;
+                        context.LoginActivities.Attach(useractivity);
+                        context.LoginActivities.Remove(useractivity);
                         context.SaveChanges();
                     }
                 }
