@@ -31,5 +31,29 @@ namespace DLLMobileAPI.Controllers
 
             return Ok(new { username = username });
         }
+
+        [AllowAnonymous]
+        [HttpPost]
+        public async Task<IHttpActionResult> Post([FromUri]string username)
+        {
+            try
+            {
+                using (var context = new ApiContext())
+                {
+                    var useractivity = context.LoginActivities.FirstOrDefault(l => l.User.UserName == username);
+                    if(useractivity != null)
+                    {
+                        context.LoginActivities.Remove(useractivity);
+                        context.SaveChanges();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                return NotFound();
+            }
+
+            return Ok(new { username = username });
+        }
     }
 }
