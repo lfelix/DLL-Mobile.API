@@ -220,6 +220,7 @@
     <Compile Include="Commands\UpdateUserCommand.cs" />
     <Compile Include="Controllers\ResetController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\ValidationController.cs" />
     <Compile Include="Entities\ApplicationUser.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
