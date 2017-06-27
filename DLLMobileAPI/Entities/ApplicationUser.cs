@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DLLMobileAPI
 {
@@ -8,6 +9,7 @@ namespace DLLMobileAPI
 
         public string Name { get; set; }
 
+        [Index(IsUnique = true)]
         public long Cpf { get; set; }
 
         public long CellPhoneNumber { get; set; }
