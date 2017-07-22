@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,26 +14,26 @@ namespace DLLMobileAPI.Controllers
     public class ResetController : ApiController
     {
 
-        [AllowAnonymous]
-        [HttpGet]
-        public async Task<IHttpActionResult> Get([FromUri]string cpf)
-        {
-            string username;
-            try
-            {
-                using (var context = new ApiContext())
-                {
-                    long lcpf = long.Parse(cpf);
-                    username = context.Users.FirstOrDefault(u => u.Cpf == lcpf).UserName;
-                }
-            }
-            catch (Exception e)
-            {
-                return NotFound();
-            }
+        //[AllowAnonymous]
+        //[HttpGet]
+        //public async Task<IHttpActionResult> Get([FromUri]string cpf)
+        //{
+        //    string username;
+        //    try
+        //    {
+        //        using (var context = new ApiContext())
+        //        {
+        //            long lcpf = long.Parse(cpf);
+        //            username = context.Users.FirstOrDefault(u => u.Cpf == lcpf).UserName;
+        //        }
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return Ok(new { username = username });
-        }
+        //    return Ok(new { username = username });
+        //}
 
 
         [HttpPut]
@@ -73,8 +74,8 @@ namespace DLLMobileAPI.Controllers
 
 
         [AllowAnonymous]
-        [HttpPost]
-        public async Task<IHttpActionResult> Post([FromUri]string username)
+        [HttpGet]
+        public async Task<IHttpActionResult> Get([FromUri]string username)
         {
             try
             {
@@ -83,9 +84,8 @@ namespace DLLMobileAPI.Controllers
                     var useractivity = context.LoginActivities.FirstOrDefault(l => l.User.UserName == username);
                     if(useractivity != null)
                     {
-                        context.LoginActivities.Attach(useractivity);
-                        context.Entry(useractivity).State = System.Data.Entity.EntityState.Deleted;
-                        await context.SaveChangesAsync();
+                        context.Entry(useractivity).State = EntityState.Deleted;
+                        context.SaveChanges();
                     }
                 }
             }
@@ -94,7 +94,7 @@ namespace DLLMobileAPI.Controllers
                 return NotFound();
             }
 
-            return Ok(new { username = username });
+            return Ok(new { success = true, username = username });
         }
     }
 }
