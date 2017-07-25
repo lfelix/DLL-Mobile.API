@@ -43,28 +43,23 @@ namespace DLLMobileAPI.Controllers
                     string encryptedPassword = crypt.BCrypt.HashPassword(createUserCommand.Password, salt);
                     var newUser = new ApplicationUser();
 
-                    if (context.Users.Any(u => u.Cpf == createUserCommand.Cpf))
-                    {
-                        return Ok(new { message = "Usuario ja existe." });
-                    }
-                    else
-                    {
-                        newUser.Name = createUserCommand.Name;
-                        newUser.UserName = createUserCommand.UserName;
-                        newUser.Cpf = createUserCommand.Cpf;
-                        newUser.CellPhoneNumber = createUserCommand.CellPhoneNumber;
-                        newUser.Password = encryptedPassword;
+                    newUser.Name = createUserCommand.Name;
+                    newUser.UserName = createUserCommand.UserName;
+                    newUser.Cpf = createUserCommand.Cpf;
+                    newUser.CellPhoneNumber = createUserCommand.CellPhoneNumber;
+                    newUser.Password = encryptedPassword;
 
-                        context.Users.Add(newUser);
-                        await context.SaveChangesAsync();
-                        return Ok(new { message = "Usuário criado com sucesso." });
-                    }
+                    context.Users.Add(newUser);
+                    await context.SaveChangesAsync();
+                    message = "Usuário criado com sucesso.";
                 }
             }
             catch (Exception e)
             {
-                return Ok(new { message = "Ocorreu um erro inesperado ao criar usuario." });
+                return InternalServerError(e);
             }
+
+            return Ok(new { message = message });
         }
 
         [HttpPut]
@@ -149,7 +144,7 @@ namespace DLLMobileAPI.Controllers
             }
             catch (Exception e)
             {
-                return Ok(new { message = "Erro ao gerar código de verificação" });
+                return BadRequest("Erro ao gerar código de verificação");
             }
 
             return Ok(new { code = verificationCode });
