@@ -218,7 +218,6 @@
     <Compile Include="Business\UserBusiness.cs" />
     <Compile Include="Commands\CreateUserCommand.cs" />
     <Compile Include="Commands\UpdateUserCommand.cs" />
-    <Compile Include="Commands\RecoverUserCommand.cs" />
     <Compile Include="Controllers\ResetController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\ValidationController.cs" />
