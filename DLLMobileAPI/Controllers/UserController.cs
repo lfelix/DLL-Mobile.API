@@ -109,11 +109,11 @@ namespace DLLMobileAPI.Controllers
         }
 
         [AllowAnonymous]
-        [HttpGet]
-        public async Task<IHttpActionResult> GetRecoverCode([FromUri]string cpf)
+        [HttpPost]
+        public async Task<IHttpActionResult> Recover([FromUri]string cpf)
         {
             long cellPhone;
-            string verificationCode = new Random().Next(1000,9999).ToString();
+            string verificationCode = new Random().Next(9999).ToString();
             try
             {
                 using (var context = new ApiContext())
