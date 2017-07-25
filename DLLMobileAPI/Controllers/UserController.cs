@@ -34,15 +34,16 @@ namespace DLLMobileAPI.Controllers
         public async Task<IHttpActionResult> Post(CreateUserCommand createUserCommand)
         {
             string message;
-
+            string hascommand = "sim";
             try
             {
                 using (var context = new ApiContext())
                 {
+                    hascommand = createUserCommand == null ? "nao" : "sim";
                     var salt = crypt.BCrypt.GenerateSalt();
                     string encryptedPassword = crypt.BCrypt.HashPassword(createUserCommand.Password, salt);
                     var newUser = new ApplicationUser();
-
+                    
                     newUser.Name = createUserCommand.Name;
                     newUser.UserName = createUserCommand.UserName;
                     newUser.Cpf = createUserCommand.Cpf;
@@ -56,7 +57,7 @@ namespace DLLMobileAPI.Controllers
             }
             catch (Exception e)
             {
-                return InternalServerError(e);
+                return Ok(hascommand);
             }
 
             return Ok(new { message = message });
