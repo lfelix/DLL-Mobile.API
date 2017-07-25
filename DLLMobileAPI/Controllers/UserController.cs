@@ -125,7 +125,10 @@ namespace DLLMobileAPI.Controllers
                     string to = cellPhone.ToString();
                     string from = "NexmoWorks";
                     string text = string.Format("Seu codigo de verificacao: {0}", verificationCode);
-                    
+
+                    byte[] bytes = Encoding.Default.GetBytes(text);
+                    text = Encoding.UTF32.GetString(bytes);
+
                     using (WebClient client = new WebClient())
                     {
 
@@ -144,7 +147,7 @@ namespace DLLMobileAPI.Controllers
             }
             catch (Exception e)
             {
-                return BadRequest("Erro ao gerar código de verificação");
+                return NotFound();
             }
 
             return Ok(new { code = verificationCode });
