@@ -123,6 +123,5 @@ namespace DLLMobileAPI.Controllers
 
             return Ok(new { cellPhone = "55" + cellPhone });
         }
-
     }
 }
