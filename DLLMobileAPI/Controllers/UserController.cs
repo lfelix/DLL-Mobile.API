@@ -2,14 +2,9 @@
 using DLLMobileAPI.Commands;
 using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
@@ -56,12 +51,12 @@ namespace DLLMobileAPI.Controllers
             }
             catch (Exception e)
             {
-                return InternalServerError(e);
+                message = "Ocorreu um erro ao criar usuário.";
             }
 
             return Ok(new { message = message });
         }
-
+        
         [HttpPut]
         [AllowAnonymous]
         public async Task<IHttpActionResult> Put(UpdateUserCommand updateUserCommand)
@@ -109,40 +104,16 @@ namespace DLLMobileAPI.Controllers
         }
 
         [AllowAnonymous]
-        [HttpPost]
-        public async Task<IHttpActionResult> Recover([FromUri]string cpf)
+        [HttpGet]
+        public async Task<IHttpActionResult> Phone([FromUri]string cpf)
         {
             long cellPhone;
-            string verificationCode = new Random().Next(9999).ToString();
             try
             {
                 using (var context = new ApiContext())
                 {
                     long lcpf = long.Parse(cpf);
                     cellPhone = context.Users.FirstOrDefault(u => u.Cpf == lcpf).CellPhoneNumber;
-                    string apiKey = "8ff1c4c2";
-                    string apiSecret = "24a67056d8efa4c4";
-                    string to = cellPhone.ToString();
-                    string from = "NexmoWorks";
-                    string text = string.Format("Seu codigo de verificacao: {0}", verificationCode);
-
-                    byte[] bytes = Encoding.Default.GetBytes(text);
-                    text = Encoding.UTF32.GetString(bytes);
-
-                    using (WebClient client = new WebClient())
-                    {
-
-                        byte[] response = client.UploadValues("https://rest.nexmo.com/sms/json", new NameValueCollection()
-                        {
-                            { "api_key", apiKey },
-                            { "api_secret", apiSecret },
-                            { "to", to },
-                            { "from", from },
-                            { "text", text },
-                        });
-
-                        string result = System.Text.Encoding.UTF8.GetString(response);
-                    }
                 }
             }
             catch (Exception e)
@@ -150,7 +121,7 @@ namespace DLLMobileAPI.Controllers
                 return NotFound();
             }
 
-            return Ok(new { code = verificationCode });
+            return Ok(new { cellPhone = "55" + cellPhone });
         }
 
     }
