@@ -56,7 +56,7 @@ namespace DLLMobileAPI.Controllers
             }
             catch (Exception e)
             {
-                return Ok(e.Message);
+                return InternalServerError(e);
             }
 
             return Ok(new { message = message });
