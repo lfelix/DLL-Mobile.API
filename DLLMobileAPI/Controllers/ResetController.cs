@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -41,10 +42,9 @@ namespace DLLMobileAPI.Controllers
                 using (var context = new ApiContext())
                 {
                     var useractivity = context.LoginActivities.FirstOrDefault(l => l.User.UserName == username);
-                    if(useractivity != null)
+                    if (useractivity != null)
                     {
-                        context.LoginActivities.Attach(useractivity);
-                        context.LoginActivities.Remove(useractivity);
+                        context.Entry(useractivity).State = EntityState.Deleted;
                         context.SaveChanges();
                     }
                 }
@@ -53,6 +53,7 @@ namespace DLLMobileAPI.Controllers
             {
                 return NotFound();
             }
+
 
             return Ok(new { username = username });
         }
