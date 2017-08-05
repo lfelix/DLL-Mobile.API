@@ -44,8 +44,8 @@ namespace DLLMobileAPI.Controllers
                     if(useractivity != null)
                     {
                         context.LoginActivities.Attach(useractivity);
-                        context.LoginActivities.Remove(useractivity);
-                        context.SaveChanges();
+                        context.Entry(useractivity).State = System.Data.Entity.EntityState.Deleted;
+                        await context.SaveChangesAsync();
                     }
                 }
             }
