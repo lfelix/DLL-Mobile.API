@@ -129,7 +129,7 @@ namespace DLLMobileAPI.Controllers
                     string apiSecret = "24a67056d8efa4c4";
                     string to = cellPhone.ToString();
                     string from = "NexmoWorks";
-                    string text = string.Format("Seu codigo de verificacao: {0}", verificationCode);
+                    string text = string.Format("Seu codigo de verificacao:  {0}", verificationCode);
                     
                     using (WebClient client = new WebClient())
                     {
