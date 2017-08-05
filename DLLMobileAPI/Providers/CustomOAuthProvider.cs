@@ -33,14 +33,14 @@ namespace DLLMobileAPI.Providers
                 if (business.AuthenticatedInAnotherDevice(deviceId, user.Id))
                 {
                     context.Rejected();
-                    context.SetError("concurrency_fail", "Este usuário já está conectado em outro dispositivo.");
+                    context.SetError("message", "Este usuário já está conectado em outro dispositivo.");
                     return;
                 }
             }
             else
             {
                 context.Rejected();
-                context.SetError("invalid_grant", "Usuário ou senha incorretos.");
+                context.SetError("message", "Usuário ou senha incorretos.");
                 return;
             }
 
