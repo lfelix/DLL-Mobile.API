@@ -406,4 +406,3 @@ C:\Users\lucasfelix\Source\Repos\DLL-Mobile.API\DLLMobileAPI\bin\BCrypt.Net.dll
 C:\Users\lucasfelix\Source\Repos\DLL-Mobile.API\DLLMobileAPI\bin\BCrypt.Net.xml
 C:\Users\Lucas\Source\Repos\DLL-Mobile.API\DLLMobileAPI\bin\BCrypt.Net.dll
 C:\Users\Lucas\Source\Repos\DLL-Mobile.API\DLLMobileAPI\bin\BCrypt.Net.xml
-C:\Users\Lucas\Source\Repos\DLL-Mobile.API\DLLMobileAPI\obj\Debug\DLLMobileAPI.Migrations.tst.resources
