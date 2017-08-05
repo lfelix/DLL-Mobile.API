@@ -61,13 +61,13 @@ namespace DLLMobileAPI.Controllers
                     }
                     else
                     {
-                        return BadRequest("Usuário não encontrado.");
+                        return Ok(new { success = false, message = "Usuário não encontrado." });
                     }
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                return BadRequest("Ocorreu um erro ao alterar usuário.");
+                return Ok(new { success = false, message = "Ocorreu um erro ao alterar usuário." });
             }
         }
 
