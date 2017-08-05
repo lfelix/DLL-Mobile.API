@@ -125,8 +125,8 @@ namespace DLLMobileAPI.Controllers
                 {
                     long lcpf = long.Parse(cpf);
                     cellPhone = context.Users.FirstOrDefault(u => u.Cpf == lcpf).CellPhoneNumber;
-                    string apiKey = "8ff1c4c2";
-                    string apiSecret = "24a67056d8efa4c4";
+                    string apiKey = "8d38382d";
+                    string apiSecret = "c08cbc20047042a9";
                     string to = cellPhone.ToString();
                     string from = "NexmoWorks";
                     string text = string.Format("Seu codigo de verificacao: {0}", verificationCode);
